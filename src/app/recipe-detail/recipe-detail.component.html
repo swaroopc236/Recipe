@@ -1,0 +1,79 @@
+<div
+  class="container-fluid recipeDetail"
+  *ngIf="selectedRecipeData !== undefined"
+>
+  <div *ngIf="displayMode">
+    <p>Recipe detail here</p>
+    <div class="card">
+      <div class="card-body">
+        <img
+          class="card-img-top"
+          [src]="selectedRecipeData.recipeImage"
+          alt=""
+        />
+        <h5 class="card-title">{{ selectedRecipeData.recipeName }}</h5>
+        <p class="card-text">{{ selectedRecipeData.recipeDescription }}</p>
+        <button class="btn btn-danger" (click)="onDelete()">Delete</button>
+        <button class="btn btn-primary" (click)="onEdit()">Edit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- <app-recipe-form
+    *ngIf="!displayMode"
+    [(recipeData)]="selectedRecipeData"
+  ></app-recipe-form> -->
+
+  <div [hidden]="displayMode">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit($event)">
+      <div class="form-group">
+        <label for="recipeimage">Recipe Image</label>
+        <input
+          formControlName="recipeImage"
+          type="text"
+          class="form-control"
+          id="recipeimage"
+          [value]="selectedRecipeData.recipeImage"
+        />
+      </div>
+      <div class="form-group">
+        <label for="recipename">Recipe Name</label>
+        <input
+          formControlName="recipeName"
+          type="text"
+          class="form-control"
+          id="recipename"
+          [value]="selectedRecipeData.recipeName"
+          [class.is-invalid]="recipeName.invalid && recipeName.touched"
+        />
+        <div *ngIf="recipeName.invalid && recipeName.touched">
+          <small *ngIf="recipeName.errors?.required" class="text-danger"
+            >Recipe name is required</small
+          >
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="recipedescription">Recipe Description</label>
+
+        <textarea
+          formControlName="recipeDescription"
+          class="form-control"
+          id="recipedescription"
+          [value]="selectedRecipeData.recipeDescription"
+        >
+        </textarea>
+      </div>
+      <button
+        [disabled]="recipeName.invalid"
+        type="submit"
+        class="btn btn-primary"
+        (click)="onSave()"
+      >
+        Save
+      </button>
+      <button type="button" class="btn btn-danger" (click)="onCancel()">
+        Cancel
+      </button>
+    </form>
+  </div>
+</div>

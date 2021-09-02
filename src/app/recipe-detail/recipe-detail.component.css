@@ -1,0 +1,18 @@
+.recipeDetail {
+  margin: 5px;
+  padding: 5px;
+  border: 3px solid black;
+  /* grid-row: 7 / 1; */
+  width: 48vw;
+  height: 90vh;
+  overflow: auto;
+}
+
+img {
+  margin-bottom: 5px;
+}
+
+button {
+  float: right;
+  margin: 5px;
+}

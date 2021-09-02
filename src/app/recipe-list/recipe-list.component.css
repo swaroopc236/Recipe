@@ -1,0 +1,35 @@
+.recipeList {
+  margin: 3px;
+  padding: 5px;
+  border: 3px solid black;
+  width: 48vw;
+  height: 80vh;
+  overflow: auto;
+}
+
+.recipeItem {
+  margin: 0;
+  height: 8vh;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
+
+.recipeImage {
+  /* padding: 10px; */
+  float: left;
+  height: 100%;
+  width: 80%;
+  /* position: absolute; */
+}
+
+.recipeImage img {
+  height: 100%;
+  width: 100%;
+  /* display: block;
+  position: absolute; */
+}
+
+button {
+  margin: 5px;
+  float: right;
+}

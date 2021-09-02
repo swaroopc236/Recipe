@@ -1,0 +1,119 @@
+<div class="container-fluid recipeList">
+  <div>
+    <p>Recipe list here</p>
+    <ul class="list-group">
+      <li
+        *ngFor="let r of recipes; let i = index"
+        class="list-group-item"
+        (click)="onRecipeClick(i)"
+      >
+        <div class="recipeItem">
+          <div class="recipeImage">
+            <img [src]="r.recipeImage" alt="" />
+          </div>
+          <div class="recipeName">
+            <p>{{ r.recipeName }}</p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="onAddClicked()"
+      data-toggle="modal"
+      data-target="#addModal"
+    >
+      Add new Recipe
+    </button>
+  </div>
+
+  <!-- <div class="modal" tabindex="-1" role="dialog" id="addModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div [hidden]="!addMode">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit($event)">
+      <div class="form-group">
+        <label for="recipename">Recipe Name</label>
+        <input
+          formControlName="recipeName"
+          type="text"
+          class="form-control"
+          id="recipename"
+          [class.is-invalid]="recipeName.touched && recipeName.invalid"
+          placeholder="Enter a recipe name"
+        />
+        <div *ngIf="recipeName.touched && recipeName.invalid">
+          <small *ngIf="recipeName.errors?.required" class="text-danger"
+            >Recipe name is required</small
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="recipedescription">Recipe Description</label>
+        <!-- <input
+          formControlName="recipeDescription"
+          type="text"
+          class="form-control"
+          id="recipedescription"
+        /> -->
+        <textarea
+          formControlName="recipeDescription"
+          class="form-control"
+          id="recipedescription"
+          placeholder="Enter the recipe description"
+        >
+        </textarea>
+      </div>
+      <div class="form-group">
+        <label for="recipeimage">Recipe Image</label>
+        <input
+          formControlName="recipeImage"
+          type="text"
+          class="form-control"
+          id="recipeimage"
+          placeholder="Enter the url of the recipe image"
+        />
+      </div>
+      <div>
+        <button
+          [disabled]="recipeName.invalid"
+          type="submit"
+          class="btn btn-primary"
+          (click)="onSave()"
+        >
+          Save
+        </button>
+        <button type="button" class="btn btn-danger" (click)="onCancel()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div>
+  {{ recipeForm.value | json }}
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit($event)">
+    <div class="form-group">
+      <label for="recipename">Recipe Name</label>
+      <input
+        formControlName="recipeName"
+        type="text"
+        class="form-control"
+        id="recipename"
+        [value]="recipeData.recipeName"
+        [class.is-invalid]="recipeName.invalid && recipeName.touched"
+        placeholder="Enter a recipe name"
+      />
+      <div *ngIf="recipeName.invalid && recipeName.touched">
+        <small *ngIf="recipeName.errors?.required" class="text-danger"
+          >Recipe name is required</small
+        >
+      </div>
+    </div>
+    <button
+      [disabled]="recipeName.invalid"
+      type="submit"
+      class="btn btn-success"
+      (click)="onSave()"
+    >
+      Save
+    </button>
+    <button type="button" class="btn btn-danger" (click)="onCancel()">
+      Cancel
+    </button>
+  </form>
+</div>
